@@ -18,10 +18,10 @@ jsfb.data.RestAdapter = Ext.extend(Object, {
         var msg = 'Error';
         try {
             var r = Ext.decode(response.responseText);
-            msg = r.message
-        } catch(e) {
-            config.failure(msg);
-        }
+            msg = r.message;
+        } catch(e) {}
+
+        config.failure(msg);
     },
     
     /* Login to the data provider. */

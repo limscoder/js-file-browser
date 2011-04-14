@@ -1,6 +1,6 @@
 /*!
- * js-file-browser 0.1
- * Copyright(c) 2011 Bio Computing Facility, University of Arizona.
+ * js-file-browser
+ * Copyright(c) 2011 Biotechnology Computing Facility, University of Arizona. See included LICENSE.txt file.
  * 
  * With components from: Ext JS Library 3.3.1
  * Copyright(c) 2006-2010 Sencha Inc.
@@ -45,12 +45,12 @@ div.message span.message-text {
 
 div.load {
  background-color: #eee;
- background-image: url(jsfb/resources/images/small-loader.gif);
+ background-image: url(../images/small-loader.gif);
 }
 
 div.error {
  background-color: #ff9393;
- background-image: url(jsfb/resources/images/exclamation--frame.png);
+ background-image: url(../images/exclamation--frame.png);
 }
 /* ==== */
 
@@ -128,7 +128,7 @@ span.label {
 
 /* ---- Grid ---- */
 div.file-grid div.filename {
- background: transparent url(jsfb/resources/images/document.png) center left no-repeat;
+ background: transparent url(../images/document.png) center left no-repeat;
  padding-top: 6px;
  padding-left: 20px;
  height: 18px;
@@ -148,7 +148,7 @@ div.file-grid div.file-status {
 }
 
 div.file-grid div.file-status div {
- background: transparent url(jsfb/resources/images/document.png) center left no-repeat;
+ background: transparent url(../images/document.png) center left no-repeat;
  float: left;
  margin: 2px;
  width: 16px;

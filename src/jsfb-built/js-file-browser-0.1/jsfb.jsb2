@@ -1,7 +1,7 @@
 {
     "projectName": "js-file-browser",
     "deployDir": "js-file-browser-0.1",
-    "licenseText": "js-file-browser 0.1\nCopyright(c) 2011 Bio Computing Facility, University of Arizona.\n\nWith components from: Ext JS Library 3.3.1\nCopyright(c) 2006-2010 Sencha Inc.\nlicensing@sencha.com\nhttp://www.sencha.com/license",
+    "licenseText": "js-file-browser\nCopyright(c) 2011 Biotechnology Computing Facility, University of Arizona. See included LICENSE.txt file.\n\nWith components from: Ext JS Library 3.3.1\nCopyright(c) 2006-2010 Sencha Inc.\nlicensing@sencha.com\nhttp://www.sencha.com/license",
     "pkgs": [{
         "name": "Ext Base",
         "file": "adapter/ext/ext-base.js",
