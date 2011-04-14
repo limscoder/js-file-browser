@@ -15,7 +15,7 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
         Ext.apply(defaults, config);
         
         if (!defaults.fileAdapter) {
-            defaults.fileAdapter = new jsfb.data.TestAdapter();
+            defaults.fileAdapter = new jsfb.data.RestAdapter();
         }
         
         // init instance.

@@ -12,6 +12,17 @@ jsfb.data.RestAdapter = Ext.extend(Object, {
         
         return urlParts.join('/');
     },
+
+    /* Handle an API failure. */
+    failure:  function(config, response, opts) {
+        var msg = 'Error';
+        try {
+            var r = Ext.decode(response.responseText);
+            msg = r.message
+        } catch(e) {
+            config.failure(msg);
+        }
+    },
     
     /* Login to the data provider. */
     login: function(config) {
@@ -19,23 +30,54 @@ jsfb.data.RestAdapter = Ext.extend(Object, {
             Ext.util.base64.encode(config.user + ':' + config.password);
         
         // Set auth header on all future requests.
-        /*Ext.Ajax.defaultHeaders = {
+        Ext.Ajax.defaultHeaders = {
             'Authorization': 'Basic ' + 
                 Ext.util.base64.encode(config.user + ':' + config.password)
         };
-        
-        config.log(Ext.Ajax.defaultHeaders);*/
-        
+
+        this.list(config);
+    },
+
+    /* Logout. */
+    logout: function(config) {
+        // Delete auth header.
+        delete Ext.Ajax.defaultHeaders['Authorization'];
+
+        if (config.success) {
+            config.success();
+        }
+    },
+
+    /* List the contents of a directory. */
+    list: function(config) {
+        var self = this;
+
         Ext.Ajax.request({
             url: config.url + '/io-v1/io/list/' + this.pathAsUrl(config.path) + '/',
-            headers: {
-                Authorization: auth
-            },
             success: function(response, opts) {
-                config.success(response.result);
+                var r = Ext.decode(response.responseText);
+                config.success(r.result);
             },
             failure:  function(response, opts) {
-                config.failure(response.message);
+                self.failure(config, response, opts);
+            }
+        });
+    },
+
+    /* Create a new directory. */
+    makeDir: function(config) {
+        var self = this;
+
+        Ext.Ajax.request({
+            url: config.url + '/io-v1/io/' + this.pathAsUrl(config.path) + '/',
+            params: {dirName: config.name, action: 'mkdir'},
+            method: 'PUT',
+            success: function(response, opts) {
+                var r = Ext.decode(response.responseText);
+                config.success(r.result);
+            },
+            failure:  function(response, opts) {
+                self.failure(config, response, opts);
             }
         });
     }

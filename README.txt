@@ -9,6 +9,8 @@
  *   widgets: UI code
  *   jsfb.js: application namespace setup.
  * jsfb-built: js-file-browser build code/distribution
+ * index-built.html: example file browser for production
+ * index.html: example file browser for development
  *
  */
 
