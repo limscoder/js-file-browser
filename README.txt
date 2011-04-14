@@ -21,7 +21,8 @@
  *
  * Build tool can be run with the following command:
  *
- * java -jar JSBuilder.jar -p irods.jsb2 -d irods-built
+ * FROM /src:
+ * java -jar ../builder/JSBuilder2.jar -p jsfb/jsfb.jsb2 -d jsfb-built
  *
  * Instructions can be found here: http://www.rahulsingla.com/blog/2010/12/extjs-custom-build-with-selected-components
  *
