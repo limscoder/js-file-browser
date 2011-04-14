@@ -1,0 +1,1689 @@
+{
+    "projectName": "js-file-browser",
+    "deployDir": "js-file-browser-0.1",
+    "licenseText": "js-file-browser 0.1\nCopyright(c) 2011 Bio Computing Facility, University of Arizona.\n\nWith components from: Ext JS Library 3.3.1\nCopyright(c) 2006-2010 Sencha Inc.\nlicensing@sencha.com\nhttp://www.sencha.com/license",
+    "pkgs": [{
+        "name": "Ext Base",
+        "file": "adapter/ext/ext-base.js",
+        "isDebug": true,
+        "fileIncludes": [{
+            "text": "Ext.js",
+            "path": "../extjs/src/ext-core/src/core/"
+        },{
+            "text": "TaskMgr.js",
+            "path": "../extjs/src/ext-core/src/util/"
+        },{
+            "text": "ext-base-begin.js",
+            "path": "../extjs/src/ext-core/src/adapter/"
+        },{
+            "text": "ext-base-dom.js",
+            "path": "../extjs/src/ext-core/src/adapter/"
+        },{
+            "text": "ext-base-event.js",
+            "path": "../extjs/src/ext-core/src/adapter/"
+        },{
+            "text": "ext-base-ajax.js",
+            "path": "../extjs/src/ext-core/src/adapter/"
+        },{
+            "text": "ext-base-anim.js",
+            "path": "../extjs/src/ext-core/src/adapter/"
+        },{
+            "text": "ext-base-anim-extra.js",
+            "path": "../extjs/src/ext-core/src/adapter/"
+        },{
+            "text": "ext-base-end.js",
+            "path": "../extjs/src/ext-core/src/adapter/"
+        }]
+    },{
+        "name": "YUI Adapter",
+        "file": "adapter/yui/ext-yui-adapter.js",
+        "isDebug": true,
+        "fileIncludes": [{
+            "text": "Ext.js",
+            "path": "../extjs/src/ext-core/src/core/"
+        },{
+            "text": "TaskMgr.js",
+            "path": "../extjs/src/ext-core/src/util/"
+        },{
+            "text": "yui-bridge.js",
+            "path": "../extjs/src/adapter/"
+        }]
+    },{
+        "name": "Prototype Adapter",
+        "file": "adapter/prototype/ext-prototype-adapter.js",
+        "isDebug": true,
+        "fileIncludes": [{
+            "text": "Ext.js",
+            "path": "../extjs/src/ext-core/src/core/"
+        },{
+            "text": "TaskMgr.js",
+            "path": "../extjs/src/ext-core/src/util/"
+        },{
+            "text": "prototype-bridge.js",
+            "path": "../extjs/src/adapter/"
+        }]
+    },{
+        "name": "jQuery Adapter",
+        "file": "adapter/jquery/ext-jquery-adapter.js",
+        "isDebug": true,
+        "fileIncludes": [{
+            "text": "Ext.js",
+            "path": "../extjs/src/ext-core/src/core/"
+        },{
+            "text": "TaskMgr.js",
+            "path": "../extjs/src/ext-core/src/util/"
+        },{
+            "text": "jquery-bridge.js",
+            "path": "../extjs/src/adapter/"
+        }]
+    },{
+        "name": "Ext Core",
+        "file": "pkgs/ext-core.js",
+        "isDebug": true,
+        "fileIncludes": [{
+            "text": "Observable.js",
+            "path": "../extjs/src/ext-core/src/util/"
+        },{
+            "text": "DomHelper.js",
+            "path": "../extjs/src/ext-core/src/core/"
+        },{
+            "text": "Template.js",
+            "path": "../extjs/src/ext-core/src/core/"
+        },{
+            "text": "DomQuery.js",
+            "path": "../extjs/src/ext-core/src/core/"
+        },{
+            "text": "DelayedTask.js",
+            "path": "../extjs/src/ext-core/src/util/"
+        },{
+            "text": "Element.js",
+            "path": "../extjs/src/ext-core/src/core/"
+        },{
+            "text": "Element.traversal.js",
+            "path": "../extjs/src/ext-core/src/core/"
+        },{
+            "text": "Element.insertion.js",
+            "path": "../extjs/src/ext-core/src/core/"
+        },{
+            "text": "Element.style.js",
+            "path": "../extjs/src/ext-core/src/core/"
+        },{
+            "text": "Element.position.js",
+            "path": "../extjs/src/ext-core/src/core/"
+        },{
+            "text": "Element.scroll.js",
+            "path": "../extjs/src/ext-core/src/core/"
+        },{
+            "text": "Element.fx.js",
+            "path": "../extjs/src/ext-core/src/core/"
+        },{
+            "text": "Fx.js",
+            "path": "../extjs/src/ext-core/src/core/"
+        },{
+            "text": "CompositeElementLite.js",
+            "path": "../extjs/src/ext-core/src/core/"
+        },{
+            "text": "Connection.js",
+            "path": "../extjs/src/ext-core/src/data/"
+        },{
+            "text": "JSON.js",
+            "path": "../extjs/src/ext-core/src/util/"
+        },
+        {
+            "text": "EventManager.js",
+            "path": "../extjs/src/ext-core/src/core/"
+        },{
+            "text": "Loader.js",
+            "path": "../extjs/src/ext-core/src/core/"
+        }]
+    },{
+        "name": "Ext Foundation",
+        "file": "pkgs/ext-foundation.js",
+        "isDebug": true,
+        "fileIncludes": [{
+            "text": "Ext-more.js",
+            "path": "../extjs/src/core/"
+        },{
+            "text": "ext-base-dom-more.js",
+            "path": "../extjs/src/adapter/"
+        },{
+            "text": "ext-base-region.js",
+            "path": "../extjs/src/ext-core/src/adapter/"
+        },{
+            "text": "ext-base-point.js",
+            "path": "../extjs/src/ext-core/src/adapter/"
+        },{
+            "text": "DomHelper-more.js",
+            "path": "../extjs/src/core/"
+        },{
+            "text": "Template-more.js",
+            "path": "../extjs/src/core/"
+        },{
+            "text": "Function.js",
+            "path": "../extjs/src/util/"
+        },{
+            "text": "Observable-more.js",
+            "path": "../extjs/src/util/"
+        },{
+            "text": "EventManager-more.js",
+            "path": "../extjs/src/core/"
+        },{
+            "text": "Element-more.js",
+            "path": "../extjs/src/core/"
+        },{
+            "text": "Element.alignment.js",
+            "path": "../extjs/src/core/"
+        },{
+            "text": "Element.traversal-more.js",
+            "path": "../extjs/src/core/"
+        },{
+            "text": "Element.insertion-more.js",
+            "path": "../extjs/src/core/"
+        },{
+            "text": "Element.style-more.js",
+            "path": "../extjs/src/core/"
+        },{
+            "text": "Element.position-more.js",
+            "path": "../extjs/src/core/"
+        },{
+            "text": "Element.scroll-more.js",
+            "path": "../extjs/src/core/"
+        },{
+            "text": "Element.fx-more.js",
+            "path": "../extjs/src/core/"
+        },{
+            "text": "Element.keys.js",
+            "path": "../extjs/src/core/"
+        },{
+            "text": "CompositeElementLite-more.js",
+            "path": "../extjs/src/core/"
+        },{
+            "text": "CompositeElement.js",
+            "path": "../extjs/src/core/"
+        },{
+            "text": "UpdateManager.js",
+            "path": "../extjs/src/util/"
+        },{
+            "text": "Date.js",
+            "path": "../extjs/src/util/"
+        },{
+            "text": "MixedCollection.js",
+            "path": "../extjs/src/util/"
+        },{
+            "text": "AbstractManager.js",
+            "path": "../extjs/src/util/"
+        },{
+            "text": "Format.js",
+            "path": "../extjs/src/util/"
+        },{
+            "text": "XTemplate.js",
+            "path": "../extjs/src/util/"
+        },{
+            "text": "CSS.js",
+            "path": "../extjs/src/util/"
+        },{
+            "text": "ClickRepeater.js",
+            "path": "../extjs/src/util/"
+        },{
+            "text": "KeyNav.js",
+            "path": "../extjs/src/util/"
+        },{
+            "text": "KeyMap.js",
+            "path": "../extjs/src/util/"
+        },{
+            "text": "TextMetrics.js",
+            "path": "../extjs/src/util/"
+        },{
+            "text": "Cookies.js",
+            "path": "../extjs/src/util/"
+        },{
+            "text": "Error.js",
+            "path": "../extjs/src/core/"
+        }]
+    },{
+        "name": "Drag Drop",
+        "file": "pkgs/ext-dd.js",
+        "isDebug": true,
+        "pkgDeps": ["pkgs/ext-foundation.js"],
+        "fileIncludes": [{
+            "text": "DDCore.js",
+            "path": "../extjs/src/dd/"
+        },{
+            "text": "DragTracker.js",
+            "path": "../extjs/src/dd/"
+        },{
+            "text": "ScrollManager.js",
+            "path": "../extjs/src/dd/"
+        },{
+            "text": "Registry.js",
+            "path": "../extjs/src/dd/"
+        },{
+            "text": "StatusProxy.js",
+            "path": "../extjs/src/dd/"
+        },{
+            "text": "DragSource.js",
+            "path": "../extjs/src/dd/"
+        },{
+            "text": "DropTarget.js",
+            "path": "../extjs/src/dd/"
+        },{
+            "text": "DragZone.js",
+            "path": "../extjs/src/dd/"
+        },{
+            "text": "DropZone.js",
+            "path": "../extjs/src/dd/"
+        },{
+            "text": "Element.dd.js",
+            "path": "../extjs/src/core/"
+        }]
+    },{
+        "name": "Data Foundation",
+        "file": "pkgs/data-foundation.js",
+        "isDebug": true,
+        "pkgDeps": ["pkgs/ext-foundation.js"],
+        "fileIncludes": [{
+            "text": "Api.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "SortTypes.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "Record.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "StoreMgr.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "Store.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "DataField.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "DataReader.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "DataWriter.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "DataProxy.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "Request.js",
+            "path": "../extjs/src/data/"
+        }, {
+            "text": "Response.js",
+            "path": "../extjs/src/data/"
+        }, {
+            "text": "ScriptTagProxy.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "HttpProxy.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "MemoryProxy.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "Types.js",
+            "path": "../extjs/src/data/"
+        }]
+    },{
+        "name": "Data - Json",
+        "file": "pkgs/data-json.js",
+        "isDebug": true,
+        "pkgDeps": ["pkgs/data-foundation.js"],
+        "fileIncludes": [{
+            "text": "JsonWriter.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "JsonReader.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "ArrayReader.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "ArrayStore.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "JsonStore.js",
+            "path": "../extjs/src/data/"
+        }]
+    },{
+        "name": "Data - XML",
+        "file": "pkgs/data-xml.js",
+        "isDebug": true,
+        "pkgDeps": ["pkgs/data-foundation.js"],
+        "fileIncludes": [{
+            "text": "XmlWriter.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "XmlReader.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "XmlStore.js",
+            "path": "../extjs/src/data/"
+        }]
+    },{
+        "name": "Data - GroupingStore",
+        "file": "pkgs/data-grouping.js",
+        "isDebug": true,
+        "pkgDeps": ["pkgs/data-foundation.js"],
+        "fileIncludes": [{
+            "text": "GroupingStore.js",
+            "path": "../extjs/src/data/"
+        }]
+    },{
+        "name": "Direct",
+        "file": "pkgs/direct.js",
+        "isDebug": true,
+        "pkgDeps": ["pkgs/ext-foundation.js"],
+        "fileIncludes": [{
+            "text": "DirectProxy.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "DirectStore.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "Direct.js",
+            "path": "../extjs/src/direct/"
+        },{
+            "text": "Transaction.js",
+            "path": "../extjs/src/direct/"
+        },{
+            "text": "Event.js",
+            "path": "../extjs/src/direct/"
+        },{
+            "text": "Provider.js",
+            "path": "../extjs/src/direct/"
+        },{
+            "text": "JsonProvider.js",
+            "path": "../extjs/src/direct/"
+        },{
+            "text": "PollingProvider.js",
+            "path": "../extjs/src/direct/"
+        },{
+            "text": "RemotingProvider.js",
+            "path": "../extjs/src/direct/"
+        }]
+    },{
+        "name": "Component Foundation",
+        "file": "pkgs/cmp-foundation.js",
+        "isDebug": true,
+        "pkgDeps": ["pkgs/ext-foundation.js"],
+        "fileIncludes": [{
+            "text": "ComponentMgr.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "Component.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "Action.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "Layer.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "Shadow.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "BoxComponent.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "SplitBar.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "Container.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "ContainerLayout.js",
+            "path": "../extjs/src/widgets/layout/"
+        },{
+            "text": "AutoLayout.js",
+            "path": "../extjs/src/widgets/layout/"
+        },{
+            "text": "FitLayout.js",
+            "path": "../extjs/src/widgets/layout/"
+        },{
+            "text": "CardLayout.js",
+            "path": "../extjs/src/widgets/layout/"
+        },{
+            "text": "AnchorLayout.js",
+            "path": "../extjs/src/widgets/layout/"
+        },{
+            "text": "ColumnLayout.js",
+            "path": "../extjs/src/widgets/layout/"
+        },{
+            "text": "BorderLayout.js",
+            "path": "../extjs/src/widgets/layout/"
+        },{
+            "text": "FormLayout.js",
+            "path": "../extjs/src/widgets/layout/"
+        },{
+            "text": "AccordionLayout.js",
+            "path": "../extjs/src/widgets/layout/"
+        },{
+            "text": "TableLayout.js",
+            "path": "../extjs/src/widgets/layout/"
+        },{
+            "text": "AbsoluteLayout.js",
+            "path": "../extjs/src/widgets/layout/"
+        },{
+            "text": "BoxLayout.js",
+            "path": "../extjs/src/widgets/layout/"
+        },{
+            "text": "MenuOverflow.js",
+            "path": "../extjs/src/widgets/layout/box/"
+        },{
+            "text": "ScrollerOverflow.js",
+            "path": "../extjs/src/widgets/layout/box/"
+        },{
+            "text": "HBoxLayout.js",
+            "path": "../extjs/src/widgets/layout/"
+        },{
+            "text": "VBoxLayout.js",
+            "path": "../extjs/src/widgets/layout/"
+        },{
+            "text": "ToolbarLayout.js",
+            "path": "../extjs/src/widgets/layout/"
+        },{
+            "text": "MenuLayout.js",
+            "path": "../extjs/src/widgets/layout/"
+        },{
+            "text": "Viewport.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "Panel.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "Editor.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "ColorPalette.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "DatePicker.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "LoadMask.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "Slider.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "ProgressBar.js",
+            "path": "../extjs/src/widgets/"
+        }, {
+            "text": "CenterLayout.js",
+            "path": "../extjs/examples/ux/"
+        }]
+    },{
+        "name": "Window",
+        "file": "pkgs/window.js",
+        "isDebug": true,
+        "pkgDeps": ["pkgs/cmp-foundation.js"],
+        "fileIncludes": [{
+            "text": "Window.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "WindowManager.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "MessageBox.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "PanelDD.js",
+            "path": "../extjs/src/widgets/"
+        }]
+    },{
+        "name": "State",
+        "file": "pkgs/state.js",
+        "isDebug": true,
+        "pkgDeps": ["pkgs/cmp-foundation.js"],
+        "fileIncludes": [{
+            "text": "Provider.js",
+            "path": "../extjs/src/state/"
+        },{
+            "text": "StateManager.js",
+            "path": "../extjs/src/state/"
+        },{
+            "text": "CookieProvider.js",
+            "path": "../extjs/src/state/"
+        }]
+    },{
+        "name": "Data and ListViews",
+        "file": "pkgs/data-list-views.js",
+        "isDebug": true,
+        "pkgDeps": ["pkgs/cmp-foundation.js","pkgs/data-foundation.js"],
+        "fileIncludes": [{
+            "text": "DataView.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "ListView.js",
+            "path": "../extjs/src/widgets/list/"
+        },{
+            "text": "Column.js",
+            "path": "../extjs/src/widgets/list/"
+        },{
+            "text": "ColumnResizer.js",
+            "path": "../extjs/src/widgets/list/"
+        },{
+            "text": "Sorter.js",
+            "path": "../extjs/src/widgets/list/"
+        }]
+    },{
+        "name": "Resizable",
+        "file": "pkgs/resizable.js",
+        "isDebug": true,
+        "pkgs": ["pkgs/ext-foundation.js"],
+        "fileIncludes": [{
+            "text": "Resizable.js",
+            "path": "../extjs/src/widgets/"
+        }]
+
+    },{
+        "name": "TabPanel",
+        "file": "pkgs/pkg-tabs.js",
+        "isDebug": true,
+        "pkgs": ["pkgs/cmp-foundation.js"],
+        "fileIncludes": [{
+            "text": "TabPanel.js",
+            "path": "../extjs/src/widgets/"
+        }]
+    },{
+        "name": "Buttons",
+        "file": "pkgs/pkg-buttons.js",
+        "isDebug": true,
+        "pkgs": ["pkgs/cmp-foundation.js"],
+        "fileIncludes": [{
+            "text": "Button.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "SplitButton.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "CycleButton.js",
+            "path": "../extjs/src/widgets/"
+        }]
+    },{
+        "name": "Toolbars",
+        "file": "pkgs/pkg-toolbars.js",
+        "type": "js",
+        "isDebug": true,
+        "pkgs": ["pkgs/cmp-foundation.js"],
+        "fileIncludes": [{
+            "text": "Toolbar.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "ButtonGroup.js",
+            "path": "../extjs/src/widgets/"
+        },{
+            "text": "PagingToolbar.js",
+            "path": "../extjs/src/widgets/"
+        }]
+    },{
+        "name": "History",
+        "file": "pkgs/pkg-history.js",
+        "isDebug": true,
+        "pkgs": ["pkgs/ext-foundation.js"],
+        "fileIncludes": [{
+            "text": "History.js",
+            "path": "../extjs/src/util/"
+        }]
+    },{
+        "name": "Tooltips",
+        "file": "pkgs/pkg-tips.js",
+        "isDebug": true,
+        "pkgs": ["pkgs/cmp-foundation.js"],
+        "fileIncludes": [{
+            "text": "Tip.js",
+            "path": "../extjs/src/widgets/tips/"
+        },{
+            "text": "ToolTip.js",
+            "path": "../extjs/src/widgets/tips/"
+        },{
+            "text": "QuickTip.js",
+            "path": "../extjs/src/widgets/tips/"
+        },{
+            "text": "QuickTips.js",
+            "path": "../extjs/src/widgets/tips/"
+        },{
+            "text": "SliderTip.js",
+            "path": "../extjs/src/widgets/tips/"
+        }]
+    },{
+        "name": "Trees",
+        "file": "pkgs/pkg-tree.js",
+        "isDebug": true,
+        "pkgs": ["pkgs/cmp-foundation.js"],
+        "fileIncludes": [{
+            "text": "TreePanel.js",
+            "path": "../extjs/src/widgets/tree/"
+        },{
+            "text": "TreeEventModel.js",
+            "path": "../extjs/src/widgets/tree/"
+        },{
+            "text": "TreeSelectionModel.js",
+            "path": "../extjs/src/widgets/tree/"
+        },{
+            "text": "Tree.js",
+            "path": "../extjs/src/data/"
+        },{
+            "text": "TreeNode.js",
+            "path": "../extjs/src/widgets/tree/"
+        },{
+            "text": "AsyncTreeNode.js",
+            "path": "../extjs/src/widgets/tree/"
+        },{
+            "text": "TreeNodeUI.js",
+            "path": "../extjs/src/widgets/tree/"
+        },{
+            "text": "TreeLoader.js",
+            "path": "../extjs/src/widgets/tree/"
+        },{
+            "text": "TreeFilter.js",
+            "path": "../extjs/src/widgets/tree/"
+        },{
+            "text": "TreeSorter.js",
+            "path": "../extjs/src/widgets/tree/"
+        },{
+            "text": "TreeDropZone.js",
+            "path": "../extjs/src/widgets/tree/"
+        },{
+            "text": "TreeDragZone.js",
+            "path": "../extjs/src/widgets/tree/"
+        },{
+            "text": "TreeEditor.js",
+            "path": "../extjs/src/widgets/tree/"
+        }]
+    },{
+        "name": "Charts",
+        "file": "pkgs/pkg-charts.js",
+        "isDebug": true,
+        "pkgs": ["pkgs/cmp-foundation.js"],
+        "fileIncludes": [{
+            "text": "swfobject.js",
+            "path": "../extjs/src/widgets/chart/"
+        },{
+            "text": "FlashComponent.js",
+            "path": "../extjs/src/widgets/chart/"
+        },{
+            "text": "EventProxy.js",
+            "path": "../extjs/src/widgets/chart/"
+        },{
+            "text": "Chart.js",
+            "path": "../extjs/src/widgets/chart/"
+        }]
+    },{
+        "name": "Menu",
+        "file": "pkgs/pkg-menu.js",
+        "isDebug": true,
+        "pkgs": ["pkgs/cmp-foundation.js"],
+        "fileIncludes": [{
+            "text": "Menu.js",
+            "path": "../extjs/src/widgets/menu/"
+        },{
+            "text": "MenuMgr.js",
+            "path": "../extjs/src/widgets/menu/"
+        },{
+            "text": "BaseItem.js",
+            "path": "../extjs/src/widgets/menu/"
+        },{
+            "text": "TextItem.js",
+            "path": "../extjs/src/widgets/menu/"
+        },{
+            "text": "Separator.js",
+            "path": "../extjs/src/widgets/menu/"
+        },{
+            "text": "Item.js",
+            "path": "../extjs/src/widgets/menu/"
+        },{
+            "text": "CheckItem.js",
+            "path": "../extjs/src/widgets/menu/"
+        },{
+            "text": "DateMenu.js",
+            "path": "../extjs/src/widgets/menu/"
+        },{
+            "text": "ColorMenu.js",
+            "path": "../extjs/src/widgets/menu/"
+        }]
+    },{
+        "name": "Forms",
+        "file": "pkgs/pkg-forms.js",
+        "isDebug": true,
+        "pkgs": ["pkgs/cmp-foundation.js"],
+        "fileIncludes": [{
+            "text": "Field.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "TextField.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "TriggerField.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "TextArea.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "NumberField.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "DateField.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "DisplayField.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "Combo.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "Checkbox.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "CheckboxGroup.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "CompositeField.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "Radio.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "RadioGroup.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "Hidden.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "BasicForm.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "Form.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "FieldSet.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "HtmlEditor.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "TimeField.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "SliderField.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "Label.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "Action.js",
+            "path": "../extjs/src/widgets/form/"
+        },{
+            "text": "VTypes.js",
+            "path": "../extjs/src/widgets/form/"
+        }]
+    },{
+        "name": "Grid Foundation",
+        "file": "pkgs/pkg-grid-foundation.js",
+        "isDebug": true,
+        "pkgs": ["pkgs/cmp-foundation.js"],
+        "fileIncludes": [{
+            "text": "GridPanel.js",
+            "path": "../extjs/src/widgets/grid/"
+        },{
+            "text": "PivotGrid.js",
+            "path": "../extjs/src/widgets/grid/"
+        },{
+            "text": "GridView.js",
+            "path": "../extjs/src/widgets/grid/"
+        },{
+            "text": "PivotGridView.js",
+            "path": "../extjs/src/widgets/grid/"
+        },{
+            "text": "PivotAxis.js",
+            "path": "../extjs/src/widgets/grid/"
+        },{
+            "text": "ColumnDD.js",
+            "path": "../extjs/src/widgets/grid/"
+        },{
+            "text": "ColumnSplitDD.js",
+            "path": "../extjs/src/widgets/grid/"
+        },{
+            "text": "GridDD.js",
+            "path": "../extjs/src/widgets/grid/"
+        },{
+            "text": "ColumnModel.js",
+            "path": "../extjs/src/widgets/grid/"
+        },{
+            "text": "AbstractSelectionModel.js",
+            "path": "../extjs/src/widgets/grid/"
+        },{
+            "text": "RowSelectionModel.js",
+            "path": "../extjs/src/widgets/grid/"
+        },{
+            "text": "Column.js",
+            "path": "../extjs/src/widgets/grid/"
+        },{
+            "text": "RowNumberer.js",
+            "path": "../extjs/src/widgets/grid/"
+        },{
+            "text": "CheckboxSelectionModel.js",
+            "path": "../extjs/src/widgets/grid/"
+        }]
+    },{
+        "name": "Grid Editor",
+        "file": "pkgs/pkg-grid-editor.js",
+        "isDebug": true,
+        "pkgs": ["pkgs/pkg-grid-foundation.js"],
+        "fileIncludes": [{
+            "text": "CellSelectionModel.js",
+            "path": "../extjs/src/widgets/grid/"
+        },{
+            "text": "EditorGrid.js",
+            "path": "../extjs/src/widgets/grid/"
+        },{
+            "text": "GridEditor.js",
+            "path": "../extjs/src/widgets/grid/"
+        }]
+    },{
+        "name": "Grid - Property Grid",
+        "file": "pkgs/pkg-grid-property.js",
+        "isDebug": true,
+        "pkgs": ["pkgs/pkg-grid-foundation.js"],
+        "fileIncludes": [{
+            "text": "PropertyGrid.js",
+            "path": "../extjs/src/widgets/grid/"
+        }]
+    },{
+        "name": "Grid - GroupingView",
+        "file": "pkgs/pkg-grid-grouping.js",
+        "isDebug": true,
+        "pkgs": ["pkgs/pkg-grid-foundation.js", "pkgs/data-grouping.js"],
+        "fileIncludes": [{
+            "text": "GroupingView.js",
+            "path": "../extjs/src/widgets/grid/"
+        }]
+    },{
+        "name": "Ext Core",
+        "file": "ext-core-all.js",
+        "isDebug": true,
+        "includeDeps": true,
+        "pkgDeps": [
+            "adapter/ext/ext-base.js",
+            "pkgs/ext-core.js"
+        ],
+        "fileIncludes": []
+    },{
+        "name": "Ext All No Core",
+        "file": "ext-all-no-core.js",
+        "isDebug": true,
+        "includeDeps": true,
+        "pkgDeps": [
+            "pkgs/ext-foundation.js",
+            "pkgs/cmp-foundation.js",
+            "pkgs/ext-dd.js",
+            "pkgs/data-foundation.js",
+            "pkgs/data-json.js",
+            "pkgs/data-grouping.js",
+            "pkgs/direct.js",
+            "pkgs/resizable.js",
+            "pkgs/window.js",
+            "pkgs/state.js",
+            "pkgs/data-list-views.js",
+            "pkgs/pkg-buttons.js",
+            "pkgs/pkg-toolbars.js",
+            "pkgs/pkg-history.js",
+            "pkgs/pkg-tips.js",
+            "pkgs/pkg-menu.js",
+            "pkgs/pkg-forms.js",
+            "pkgs/pkg-grid-foundation.js",
+            "pkgs/pkg-grid-editor.js",
+            "pkgs/pkg-grid-property.js",
+            "pkgs/pkg-grid-grouping.js"
+        ],
+        "fileIncludes": []
+    },{
+        "name": "Ext All",
+        "file": "ext-all.js",
+        "isDebug": true,
+        "includeDeps": true,
+        "pkgDeps": [
+            "pkgs/ext-core.js",
+            "ext-all-no-core.js"
+        ],
+        "fileIncludes": []
+    }, {
+        "name": "Calendar",
+        "file": "examples/calendar/calendar-all.js",
+        "isDebug": true,
+        "fileIncludes": [
+            {"path": "../extjs/examples/calendar/src/",           "text": "Ext.calendar.js"},
+            {"path": "../extjs/examples/calendar/src/templates/", "text": "DayHeaderTemplate.js"},
+            {"path": "../extjs/examples/calendar/src/templates/", "text": "DayBodyTemplate.js"},
+            {"path": "../extjs/examples/calendar/src/templates/", "text": "DayViewTemplate.js"},
+            {"path": "../extjs/examples/calendar/src/templates/", "text": "BoxLayoutTemplate.js"},
+            {"path": "../extjs/examples/calendar/src/templates/", "text": "MonthViewTemplate.js"},
+            {"path": "../extjs/examples/calendar/src/dd/",        "text": "CalendarScrollManager.js"},
+            {"path": "../extjs/examples/calendar/src/dd/",        "text": "StatusProxy.js"},
+            {"path": "../extjs/examples/calendar/src/dd/",        "text": "CalendarDD.js"},
+            {"path": "../extjs/examples/calendar/src/dd/",        "text": "DayViewDD.js"},
+            {"path": "../extjs/examples/calendar/src/",           "text": "EventRecord.js"},
+            {"path": "../extjs/examples/calendar/src/views/",     "text": "MonthDayDetailView.js"},
+            {"path": "../extjs/examples/calendar/src/widgets/",   "text": "CalendarPicker.js"},
+            {"path": "../extjs/examples/calendar/src/",           "text": "WeekEventRenderer.js"},
+            {"path": "../extjs/examples/calendar/src/views/",     "text": "CalendarView.js"},
+            {"path": "../extjs/examples/calendar/src/views/",     "text": "MonthView.js"},
+            {"path": "../extjs/examples/calendar/src/views/",     "text": "DayHeaderView.js"},
+            {"path": "../extjs/examples/calendar/src/views/",     "text": "DayBodyView.js"},
+            {"path": "../extjs/examples/calendar/src/views/",     "text": "DayView.js"},
+            {"path": "../extjs/examples/calendar/src/views/",     "text": "WeekView.js"},
+            {"path": "../extjs/examples/calendar/src/widgets/",   "text": "DateRangeField.js"},
+            {"path": "../extjs/examples/calendar/src/widgets/",   "text": "ReminderField.js"},
+            {"path": "../extjs/examples/calendar/src/",           "text": "EventEditForm.js"},
+            {"path": "../extjs/examples/calendar/src/",           "text": "EventEditWindow.js"},
+            {"path": "../extjs/examples/calendar/src/",           "text": "CalendarPanel.js"}
+        ]
+    },
+    {
+       "name": "User Extension JS Pack",
+       "file": "examples/ux/ux-all.js",
+       "isDebug": true,
+       "fileIncludes": [{
+          "text": "BufferView.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "CenterLayout.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "CheckColumn.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "ColumnHeaderGroup.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "ColumnNodeUI.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "DataView-more.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "FileUploadField.js",
+          "path": "../extjs/examples/ux/fileuploadfield/"
+       },{
+          "text": "GMapPanel.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "GridFilters.js",
+          "path": "../extjs/examples/ux/gridfilters/"
+       },{
+          "text": "Filter.js",
+          "path": "../extjs/examples/ux/gridfilters/filter/"
+       },{
+          "text": "BooleanFilter.js",
+          "path": "../extjs/examples/ux/gridfilters/filter/"
+       },{
+          "text": "DateFilter.js",
+          "path": "../extjs/examples/ux/gridfilters/filter/"
+       },{
+          "text": "ListFilter.js",
+          "path": "../extjs/examples/ux/gridfilters/filter/"
+       },{
+          "text": "NumericFilter.js",
+          "path": "../extjs/examples/ux/gridfilters/filter/"
+       },{
+          "text": "StringFilter.js",
+          "path": "../extjs/examples/ux/gridfilters/filter/"
+       },{
+          "text": "ListMenu.js",
+          "path": "../extjs/examples/ux/gridfilters/menu/"
+       },{
+          "text": "RangeMenu.js",
+          "path": "../extjs/examples/ux/gridfilters/menu/"
+       },{
+          "text": "GroupSummary.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "GroupTab.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "GroupTabPanel.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "ItemSelector.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "LockingGridView.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "MultiSelect.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "PagingMemoryProxy.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "PanelResizer.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "Portal.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "PortalColumn.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "Portlet.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "ProgressBarPager.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "RowEditor.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "RowExpander.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "RowLayout.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "SearchField.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "SelectBox.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "SlidingPager.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "SpinnerField.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "Spinner.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "Spotlight.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "StatusBar.js",
+          "path": "../extjs/examples/ux/statusbar/"
+       },{
+          "text": "TabCloseMenu.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "TableGrid.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "TabScrollerMenu.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "XmlTreeLoader.js",
+          "path": "../extjs/examples/ux/"
+       },{
+          "text": "ValidationStatus.js",
+          "path": "../extjs/examples/ux/statusbar/"
+       }, {
+          "text": "TreeGridColumns.js",
+          "path": "../extjs/examples/ux/treegrid/"
+       },{
+          "text": "TreeGridNodeUI.js",
+          "path": "../extjs/examples/ux/treegrid/"
+       },{
+          "text": "TreeGridColumnResizer.js",
+          "path": "../extjs/examples/ux/treegrid/"
+       },{
+          "text": "TreeGridSorter.js",
+          "path": "../extjs/examples/ux/treegrid/"
+       },{
+          "text": "TreeGridLoader.js",
+          "path": "../extjs/examples/ux/treegrid/"
+       },{
+          "text": "TreeGrid.js",
+          "path": "../extjs/examples/ux/treegrid/"
+       }]
+    }, {
+        "name": "JS File Browser",
+        "file": "pkgs/jsfb-core.js",
+        "isDebug": true,
+        "fileIncludes": [{
+            "text": "CenterLayout.js",
+            "path": "../extjs/examples/ux/"
+        }, {
+            "text": "jsfb.js",
+            "path": ""
+        },{
+            "text": "Browser.js",
+            "path": "widgets/"
+        },{
+            "text": "FileGrid.js",
+            "path": "widgets/"
+        },{
+            "text": "Login.js",
+            "path": "widgets/"
+        },{
+            "text": "base64.js",
+            "path": "util/"
+        },{
+            "text": "TestAdapter.js",
+            "path": "data/"
+        },{
+            "text": "RestAdapter.js",
+            "path": "data/"
+        }]
+    }, {
+        "name": "JS File Browser All",
+        "file": "jsfb-all.js",
+        "isDebug": true,
+        "includeDeps": true,
+        "pkgDeps": [
+            "adapter/ext/ext-base.js",
+            "pkgs/ext-core.js",
+            "ext-all-no-core.js",
+            "pkgs/jsfb-core.js"
+        ]
+    }, {
+       "name": "JS File Browser CSS",
+       "file": "resources/css/jsfb-built.css",
+       "fileIncludes": [{
+          "text": "jsfb.css",
+          "path": "resources/css/"
+       }]
+    }, {
+       "name": "JS File Browser All CSS",
+       "file": "resources/css/jsfb-all.css",
+       "fileIncludes": [],
+       "includeDeps": true,
+       "pkgDeps": [
+           "resources/css/ext-all-notheme.css",
+           "resources/css/xtheme-blue.css",
+           "resources/css/jsfb-built.css"
+       ]
+    }, {
+       "name": "User Extension CSS Pack",
+       "file": "examples/ux/css/ux-all.css",
+       "fileIncludes": [{
+          "text": "CenterLayout.css",
+          "path": "../extjs/examples/ux/css/"
+       },{
+          "text": "ColumnHeaderGroup.css",
+          "path": "../extjs/examples/ux/css/"
+       },{
+          "text": "ColumnNodeUI.css",
+          "path": "../extjs/examples/ux/css/"
+       },{
+          "text": "fileuploadfield.css",
+          "path": "../extjs/examples/ux/fileuploadfield/css/"
+       },{
+          "text": "GridFilters.css",
+          "path": "../extjs/examples/ux/gridfilters/css/"
+       },{
+          "text": "RangeMenu.css",
+          "path": "../extjs/examples/ux/gridfilters/css/"
+       },{
+          "text": "GroupSummary.css",
+          "path": "../extjs/examples/ux/css/"
+       },{
+          "text": "GroupTab.css",
+          "path": "../extjs/examples/ux/css/"
+       },{
+          "text": "LockingGridView.css",
+          "path": "../extjs/examples/ux/css/"
+       },{
+          "text": "MultiSelect.css",
+          "path": "../extjs/examples/ux/css/"
+       },{
+          "text": "PanelResizer.css",
+          "path": "../extjs/examples/ux/css/"
+       },{
+          "text": "Portal.css",
+          "path": "../extjs/examples/ux/css/"
+       },{
+          "text": "RowEditor.css",
+          "path": "../extjs/examples/ux/css/"
+       },{
+          "text": "Spinner.css",
+          "path": "../extjs/examples/ux/css/"
+       },{
+          "text": "statusbar.css",
+          "path": "../extjs/examples/ux/statusbar/css/"
+       },{
+          "text": "treegrid.css",
+          "path": "../extjs/examples/ux/treegrid/"
+       }]
+    },{
+       "name": "Ext All CSS",
+       "file": "resources/css/ext-all.css",
+       "fileIncludes": [],
+       "includeDeps": true,
+       "pkgDeps": [
+           "resources/css/ext-all-notheme.css",
+           "resources/css/xtheme-blue.css"
+       ]
+    },{
+       "name": "Ext All CSS No theme",
+       "file": "resources/css/ext-all-notheme.css",
+       "fileIncludes": [{
+           "text": "reset.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "core.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+            "text": "resizable.css",
+            "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "form.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "button.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "toolbar.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "grid.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "pivotgrid.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "dd.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "date-picker.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "qtips.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "menu.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "box.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "combo.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "panel.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "panel-reset.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "window.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "editor.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "borders.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "layout.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "progress.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "list-view.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "slider.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "dialog.css",
+           "path": "../extjs/resources/css/structure/"
+       }]
+    },{
+       "name": "Ext Blue Theme",
+       "file": "resources/css/xtheme-blue.css",
+       "fileIncludes": [{
+           "text": "core.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "tabs.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "form.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "button.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "toolbar.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "resizable.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "grid.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "pivotgrid.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "dd.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "tree.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "date-picker.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "qtips.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "menu.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "box.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "combo.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "panel.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "window.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "editor.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "borders.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "layout.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "progress.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "list-view.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "slider.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "dialog.css",
+           "path": "../extjs/resources/css/visual/"
+       }]
+    },{
+       "name": "Your Theme",
+       "file": "resources/css/yourtheme.css",
+       "fileIncludes": [{
+           "text": "core.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "tabs.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "form.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "button.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "toolbar.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "resizable.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "grid.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "dd.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "tree.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "date-picker.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "qtips.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "menu.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "box.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "combo.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "panel.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "window.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "editor.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "borders.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "layout.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "progress.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "list-view.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "slider.css",
+           "path": "../extjs/resources/css/visual/"
+       },{
+           "text": "dialog.css",
+           "path": "../extjs/resources/css/visual/"
+       }]
+    },{
+       "name": "Ext Gray Theme",
+       "file": "resources/css/xtheme-gray.css",
+       "fileIncludes": [{
+           "text": "core.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "tabs.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "form.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "button.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "toolbar.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "resizable.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "grid.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "pivotgrid.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "dd.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "tree.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "date-picker.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "qtips.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "menu.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "box.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "combo.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "panel.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "window.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "editor.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "borders.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "layout.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "progress.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "list-view.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "slider.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       },{
+           "text": "dialog.css",
+           "path": "../extjs/resources/css/theme-gray/"
+       }]
+    },{
+       "name": "Ext Accessibility Theme",
+       "file": "resources/css/xtheme-access.css",
+       "fileIncludes": [{
+           "text": "core.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "tabs.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "form.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "button.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "toolbar.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "resizable.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "grid.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "dd.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "tree.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "date-picker.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "qtips.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "menu.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "box.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "combo.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "panel.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "window.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "editor.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "borders.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "layout.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "progress.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "list-view.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "slider.css",
+           "path": "../extjs/resources/css/theme-access/"
+       },{
+           "text": "dialog.css",
+           "path": "../extjs/resources/css/theme-access/"
+       }]
+    },{
+       "name": "Ext Debug CSS",
+       "file": "resources/css/debug.css",
+       "fileIncludes": [{
+           "text": "debug.css",
+           "path": "../extjs/resources/css/structure/"
+       },{
+           "text": "debug.css",
+           "path": "../extjs/resources/css/visual/"
+        }]
+    }],
+    "resources": [{
+        "src": "../extjs/src/",
+        "dest": "src/",
+        "filters": ".*\\.js"
+    },{
+        "src": "../extjs/examples/",
+        "dest": "examples/",
+        "filters": ".*[\\.html|\\.jpg|\\.png|\\.gif|\\.css|\\.js|\\.php]"
+    },{
+        "src": "../extjs/test/",
+        "dest": "test/",
+        "filters": ".*[\\.js]"
+    },{
+        "src": "../extjs/welcome/",
+        "dest": "welcome/",
+        "filters": ".*"
+    },{
+        "src": "../extjs/index.html",
+        "dest": "index.html",
+        "filters": ".*"
+    },{
+        "src": "../extjs/resources/",
+        "dest": "resources/",
+        "filters": ".*"
+    },{
+        "src": "../extjs/release-notes.html",
+        "dest": "release-notes.html",
+        "filters": ".*"
+    },{
+        "src": "../extjs/license.txt",
+        "dest": "license.txt",
+        "filters": ".*"
+    },{
+        "src": "../extjs/gpl-3.0.txt",
+        "dest": "gpl-3.0.txt",
+        "filters": ".*"
+    },{
+        "src": "../extjs/INCLUDE_ORDER.txt",
+        "dest": "INCLUDE_ORDER.txt",
+        "filters": ".*"
+    },{
+        "src": "jsfb.jsb2",
+        "dest": "jsfb.jsb2",
+        "filters": ".*"
+    }]
+}

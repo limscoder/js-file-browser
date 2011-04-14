@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    <!-- Pull in extjs/jsfb resources -->
+    <link rel="stylesheet" type="text/css" href="jsfb-built/js-file-browser-0.1/resources/css/jsfb-all.css">
+    <script type="text/javascript" src="jsfb-built/js-file-browser-0.1/jsfb-all.js"></script>
+    
+    <script type="text/javascript">
+        Ext.onReady(function() {
+            var browser = new jsfb.widgets.Browser({
+                    renderTo: 'main',
+                    user: 'api_sample_user',
+                    password: '',
+                    url: 'http://iplant-vm.tacc.utexas.edu:8080',
+                    path: '/api_sample_user',
+                        console.log('item selected', data);
+                    }
+                }, jsfb.app);
+        });
+    </script>
+    
+    <title>JS File Browser</title>
+</head>
+<body>
+    <div id="main"></div>
+</body>
+</html>

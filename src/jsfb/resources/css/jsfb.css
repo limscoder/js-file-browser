@@ -1,0 +1,167 @@
+/* All styles for JS File Browser components are lumped together in this file. */
+
+/* ---- messages ---- */
+div.message-container {
+ position: absolute;
+ top: 0;
+ left: 0;
+ right: 0;
+ z-index: 100000;
+}
+
+div.message {
+ position: relative;
+ background: #d2e0f1 url(../images/information-frame.png) 4px 2px no-repeat;
+ border-bottom: 1px solid #888;
+ padding: 2px 20px 2px 26px;
+}
+
+div.message div.message-close {
+ position: absolute;
+ top: 0;
+ right: 4px;
+ background: transparent url(../images/close.png) 4px 2px no-repeat;
+ height: 20px;
+ width: 20px;
+}
+
+div.message div.message-close:hover {
+ cursor: pointer;
+}
+
+div.message span.message-text {
+ color: #333;
+ font: bold 1em arial, sans-serif;
+}
+
+div.load {
+ background-color: #eee;
+ background-image: url(../images/small-loader.gif);
+}
+
+div.error {
+ background-color: #ff9393;
+ background-image: url(../images/exclamation--frame.png);
+}
+/* ==== */
+
+/* ---- CenterLayout ---- */
+.ux-layout-center-item {
+    margin:0 auto;
+    text-align:left;
+}
+/* ==== */
+
+/* ---- Login ---- */
+.login {
+ margin-top: 90px;
+}
+/* ==== */
+
+/* ---- Forms ---- */
+span.label {
+ font-weight: bold;
+ color: #333;
+}
+/* ==== */
+
+/* ---- Button ---- */
+.x-toolbar .x-btn-text {
+ font: bold 1.3em arial, sans-serif;
+}
+
+.x-toolbar .x-btn-tl{
+    background-position: -6px 0;
+}
+.x-toolbar .x-btn-tr{
+    background-position: -9px 0;
+}
+.x-toolbar .x-btn-tc{
+    background-position: 0 -9px;
+}
+
+.x-toolbar .x-btn-ml{
+    background-position: -6px -24px;
+}
+.x-toolbar .x-btn-mr{
+    background-position: -9px -24px;
+}
+
+.x-toolbar .x-btn-mc{
+    background-position: 0 -2168px;
+}
+.x-toolbar .x-btn-bl{
+    background-position: -6px -3px;
+}
+.x-toolbar .x-btn-br{
+    background-position: -9px -3px;
+}
+.x-toolbar .x-btn-bc{
+    background-position: 0 -18px;
+}/* ==== */
+
+/* ---- Panels ---- */
+.x-panel, .x-panel-body {
+ position: relative;
+}
+
+.x-panel .busy {
+ position: absolute;
+ top: 0;
+ bottom: 0;
+ left: 0;
+ right: 0;
+ background-color: #ccc;
+ opacity: 0.5;
+ z-index: 10000;
+}
+/* ==== */
+
+/* ---- Grid ---- */
+div.file-grid div.filename {
+ background: transparent url(../images/document.png) center left no-repeat;
+ padding-top: 6px;
+ padding-left: 20px;
+ height: 18px;
+}
+
+div.file-grid div.x-grid3-cell-inner {
+ font-size: 16px;
+ padding-top: 6px;
+}
+
+div.file-grid td.x-grid3-cell-first div.x-grid3-cell-inner {
+ padding-top: 0;
+}
+
+div.file-grid div.file-status {
+ margin: -4px;
+}
+
+div.file-grid div.file-status div {
+ background: transparent url(../images/document.png) center left no-repeat;
+ float: left;
+ margin: 2px;
+ width: 16px;
+ height: 18px;
+}
+
+div.file-grid div.file-status div:hover {
+ cursor: pointer;
+ /*border: 1px solid #ccc;*/
+}
+
+/* ==== */
+
+/* ---- Tables ---- */
+
+table.dl th {
+ font-weight: bold;
+ padding-right: 10px;
+}
+
+table.dl tr {
+ height: 20px;
+}
+
+/* ==== */
