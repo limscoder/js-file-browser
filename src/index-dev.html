@@ -5,10 +5,12 @@
     
     <!-- Pull in extjs resources -->
     <link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css">
-    
+    <!--<link rel="stylesheet" type="text/css" href="extjs/examples/ux/fileuploadfield/css/fileuploadfield.css">-->
+
     <script type="text/javascript" src="extjs/adapter/ext/ext-base.js"></script>
     <script type="text/javascript" src="extjs/ext-all-debug.js"></script>
     <script type="text/javascript" src="extjs/examples/ux/CenterLayout.js"></script> 
+    <!--<script type="text/javascript" src="extjs/examples/ux/fileuploadfield/FileUploadField.js"></script>-->
     
     <!-- Load and init our application -->
     <link rel="stylesheet" type="text/css" href="jsfb/resources/css/jsfb.css">
@@ -16,6 +18,8 @@
     <script type="text/javascript" src="jsfb/util/base64.js"></script>
     <script type="text/javascript" src="jsfb/data/TestAdapter.js"></script>
     <script type="text/javascript" src="jsfb/data/RestAdapter.js"></script>
+    <script type="text/javascript" src="jsfb/data/DataFormatter.js"></script>
+    <script type="text/javascript" src="jsfb/widgets/FileDetailPanel.js"></script>
     <script type="text/javascript" src="jsfb/widgets/FileGrid.js"></script>
     <script type="text/javascript" src="jsfb/widgets/Login.js"></script>
     <script type="text/javascript" src="jsfb/widgets/Browser.js"></script>
@@ -27,7 +31,6 @@
                     user: 'galaxy',
                     password: '',
                     url: 'http://galaxy.arl.arizona.edu/irods',
-                    path: '/galaxy',
                     callback: function(data) {
                         console.log('item selected', data);
                     }

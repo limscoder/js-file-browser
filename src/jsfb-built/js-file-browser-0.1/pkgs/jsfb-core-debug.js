@@ -89,6 +89,10 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
         if (!defaults.fileAdapter) {
             defaults.fileAdapter = new jsfb.data.RestAdapter();
         }
+
+        if (!defaults.dataFormatter) {
+            defaults.dataFormatter = new jsfb.data.DataFormatter();
+        }
         
         // init instance.
         Ext.apply(this, defaults);
@@ -205,8 +209,8 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
         var self = this;
         var config = this.getApiConfig();
         Ext.apply(config, {
-            success: function(data) {
-                callback(data);
+            success: function() {
+                callback.apply(this, arguments);
                 self.hideLoading();
             },
             failure: function(msg) {
@@ -276,12 +280,13 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
     
     /* Change path. */
     changePath: function(path) {
-        console.log('Changing path to: ' + path);
-        
         var self = this;
         this.path = path;
+        console.log('Changed Path: ' + this.path);
         
         var config = this.getApiCallConfig(function(data) {
+            console.log('Got Data!');
+            console.log(data);
             self.setData(data);
         });
         
@@ -309,7 +314,6 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
         var oldName = item.name;
         
         var config = this.getApiCallConfig(function() {
-            
             if (Ext.isArray(self.data)) {
                 self.changePath(self.path);
             } else {
@@ -319,7 +323,7 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
             }
         });
         config.item = item;
-        config.newName = name;
+        config.name = name;
         
         this.showLoading();
         this.fileAdapter.renamePath(config);
@@ -330,19 +334,27 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
         var self = this;
         
         var config = this.getApiCallConfig(function() {
-            if (Ext.isArray(self.data)) {
-                self.changePath(self.path);
-            } else {
-                var parts = item.path.split('/');
-                self.changePath('/' + parts.splice(parts.length - 1, 1).join('/'));
-            }
+            self.changePath(self.path);
         });
         config.item = item
         
         this.showLoading();
         this.fileAdapter.deletePath(config);
     },
-    
+
+    /* Upload a file to the current directory. */
+    upload: function(form) {
+        var self = this;
+
+        var config = this.getApiCallConfig(function() {
+            self.changePath(self.path);
+        });
+        config.form = form
+
+        this.showLoading();
+        this.fileAdapter.upload(config);
+    },
+
     /* Update directory listing data. */
     setData: function(data) {
         var self = this;
@@ -364,8 +376,11 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
                     renamepath: function(src, name, item) {
                         self.renamePath(name, item);
                     },
-                    deletepath: function(src, item) {
+                    removepath: function(src, item) {
                         self.deletePath(item);
+                    },
+                    upload: function(form) {
+                        self.upload(form);
                     }
                 }
             });
@@ -386,6 +401,14 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
         
         // render and set data
         this.doLayout();
+
+        if (Ext.isArray(data)) {
+            Ext.each(data, function(item) {
+                self.dataFormatter.format(item);
+            });
+        } else {
+            this.dataFormatter.format(data);
+        }
         this.fileGrid.setData(this.path, data);
         
         // Force grid re-render!
@@ -395,6 +418,180 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
 });
 
 Ext.reg('jsfbbrowser', jsfb.widgets.Browser);
+/**
+ * Displays file/directory details.
+ */
+jsfb.widgets.FileDetailPanel = Ext.extend(Ext.Panel, {
+    constructor: function(config) {
+        var self = this;
+
+        if (!config.data) {
+            // A file object to render must be specified.
+            throw new Error('Attribute: "data" not specified.');
+        }
+
+        // HTML to render within panel 
+        var props = [
+            {label: 'File', attr: 'name'},
+            {label: 'Path', attr: 'path'},
+            {label: 'Owner', attr: 'owner'},
+            {label: 'Modified', attr: 'modified'},
+            {label: 'Permissions', attr: 'permissions'},
+            {label: 'Size', attr: 'size'},
+            {label: 'File Type', attr: 'type'},
+            {label: 'Mime Type', attr: 'mimeType'},
+            {label: 'Download', attr: 'download'}
+        ];
+
+        var html = '<table class="dl"><tbody>';
+        Ext.each(props, function(item) {
+            if (config.data.hasOwnProperty(item.attr) && config.data[item.attr]) {
+                html += '<tr><th>' + item.label + ':</th><td>{' +
+                    item.attr + '}</td></tr>';
+            }
+        });
+        html += '</tbody></table>';
+        var tpl = new Ext.Template(html);
+
+        defaults = {
+            border: false,
+            frame: false,
+            height: 320,
+            layout: 'fit',
+            html: tpl.apply(config.data),
+            bbar: [
+               {
+                   xtype: 'button',
+                   text: 'Rename',
+                   disabled: config.data.writable? false:true,
+                   icon: 'jsfb/resources/images/document-rename.png',
+                   listeners: {
+                       render: function(item, e) {
+                           new Ext.ToolTip({
+                               target: item.el,
+                               title: 'Rename ' + config.data.type +'.'
+                           });
+                       },
+                       click: function(item, e) {
+                           // Show rename file window.
+                           var win = new Ext.Window({
+                               renderTo: self.el,
+                               title: 'Rename',
+                               width: 300,
+                               padding: 10,
+                               resizable: false,
+                               layout: 'form',
+                               items: [
+                                   {
+                                       xtype: 'form',
+                                       ref: 'renameForm',
+                                       unstyled: true,
+                                       padding: 5,
+                                       items: [
+                                           {
+                                               xtype: 'textfield',
+                                               width: 150,
+                                               fieldLabel: 'Name',
+                                               name: 'name',
+                                               value: config.data.name,
+                                               allowBlank: false
+                                           }
+                                       ]
+                                   }
+                               ],
+                               bbar: [
+                                  {
+                                      xtype: 'button',
+                                      text: 'Rename',
+                                      icon: 'jsfb/resources/images/document-rename.png',
+                                      handler: function() {
+                                          var form = win.renameForm.getForm();
+                                          if (form.isValid()) {
+                                              self.fireEvent('renamepath', self, form.getFieldValues().name, self.data);
+                                              win.close();
+                                          }
+                                      }
+                                  },
+                                  '&nbsp;',
+                                  {
+                                      xtype: 'button',
+                                      text: 'Cancel',
+                                      icon: 'jsfb/resources/images/close.png',
+                                      handler: function() {
+                                          win.close();
+                                      }
+                                  }
+                               ]
+                           });
+                           win.show();
+                       }
+                   }
+               },
+               '&nbsp;',
+               {
+                   xtype: 'button',
+                   text: 'Delete',
+                   icon: 'jsfb/resources/images/document--minus.png',
+                   disabled: config.data.writable? false:true,
+                   listeners: {
+                       render: function(item, e) {
+                           new Ext.ToolTip({
+                               target: item.el,
+                               title: 'Delete ' + config.data.type +'.'
+                           });
+                       },
+                       click: function(item, e) {
+                           // Show delete file window.
+                           var win = new Ext.Window({
+                               renderTo: self.el,
+                               title: 'Delete ' + config.data.path + '?',
+                               width: 300,
+                               padding: 10,
+                               resizable: false,
+                               html: 'Permanently delete ' + config.data.name +
+                                   (config.data.type === 'dir'? ' and all children':'') + '?',
+                               bbar: [
+                                  {
+                                      xtype: 'button',
+                                      text: 'Cancel',
+                                      icon: 'jsfb/resources/images/check.png',
+                                      handler: function() {
+                                          win.close();
+                                      }
+                                  },
+                                  '&nbsp;',
+                                  {
+                                      xtype: 'button',
+                                      text: 'Delete',
+                                      icon: 'jsfb/resources/images/close.png',
+                                      handler: function() {
+                                          self.fireEvent('removepath', self, self.data);
+                                          win.close();
+                                      }
+                                  },
+                               ]
+                           });
+                           win.show();
+                       }
+                   }
+               }
+            ]
+        };
+
+        // init instance
+        Ext.apply(defaults, config);
+        Ext.apply(this, defaults);
+        jsfb.widgets.FileDetailPanel.superclass.constructor.apply(this, arguments);
+
+        // set custom events
+        self.addEvents('renamepath', 'removepath');
+    }
+
+});
+
+Ext.reg('jsfbfiledetailpanel', jsfb.widgets.FileDetailPanel);
+
+
 /**
  * Displays individual directories and files.
  */
@@ -453,6 +650,7 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
                     '&nbsp;&nbsp;',
                     {
                         xtype: 'button',
+                        ref: 'goToParentBtn',
                         icon: 'jsfb/resources/images/folder-horizontal--arrow-90.png',
                         listeners: {
                             render: function(item, e) {
@@ -470,6 +668,7 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
                     },
                     {
                         xtype: 'button',
+                        ref: 'reloadBtn',
                         icon: 'jsfb/resources/images/folder-horizontal--arrow-315.png',
                         listeners: {
                             render: function(item, e) {
@@ -485,6 +684,7 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
                     },
                     {
                         xtype: 'button',
+                        ref: 'makeDirBtn',
                         icon: 'jsfb/resources/images/folder-horizontal--plus.png',
                         listeners: {
                             render: function(item, e) {
@@ -549,6 +749,7 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
                     },
                     {
                         xtype: 'button',
+                        ref: 'uploadBtn',
                         icon: 'jsfb/resources/images/document--plus.png',
                         listeners: {
                             render: function(item, e) {
@@ -556,7 +757,62 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
                                     target: item.el,
                                     title: 'Upload file.'
                                 });
+                            },
+                            click: function(item, e) {
+                                // Show upload file window.
+                                var win = new Ext.Window({
+                                    renderTo: self.el,
+                                    title: 'Upload File',
+                                    width: 300,
+                                    padding: 10,
+                                    resizable: false,
+                                    layout: 'form',
+                                    items: [
+                                        {
+                                            xtype: 'form',
+                                            ref: 'uploadForm',
+                                            fileUpload: true,
+                                            unstyled: true,
+                                            padding: 5,
+                                            html: 'Not Implemented yet!',
+                                            /*items: [
+                                                {
+                                                    xtype: 'fileuploadfield',
+                                                    width: 150,
+                                                    fieldLabel: 'File',
+                                                    name: 'file',
+                                                    allowBlank: false
+                                                }
+                                            ]*/
+                                        }
+                                    ],
+                                    bbar: [
+                                       {
+                                           xtype: 'button',
+                                           text: 'Upload',
+                                           icon: 'jsfb/resources/images/document--plus.png',
+                                           handler: function() {
+                                               var form = win.uploadForm.getForm();
+                                               if (form.isValid()) {
+                                                   self.fireEvent('upload', self, form);
+                                                   win.close();
+                                               }
+                                           }
+                                       },
+                                       '&nbsp;',
+                                       {
+                                           xtype: 'button',
+                                           text: 'Cancel',
+                                           icon: 'jsfb/resources/images/close.png',
+                                           handler: function() {
+                                               win.close();
+                                           }
+                                       }
+                                    ]
+                                });
+                                win.show();
                             }
+ 
                         }
                     }
                 ]
@@ -582,7 +838,10 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
                     'owner',
                     'permissions',
                     'mimetype',
-                    'type'
+                    'modified',
+                    'size',
+                    'type',
+                    'writable'
                 ]
             });
         };
@@ -596,9 +855,6 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
                         header: 'Filename',
                         dataIndex: 'name',
                         renderer: function(val, metadata, item) {
-                            // Add tooltip to row display
-                            //metadata.attr = 'ext:qtipf="' + self.getTooltip(item.data) + '"';
-                            
                             // Add icon and link
                             var icon = self.getIcon(item.data);
                             var style = 'background-image: url(jsfb/resources/images/' + icon + ');'
@@ -608,26 +864,21 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
                     {
                         header: 'Status',
                         dataIndex: 'permissions',
-                        width: 28,
+                        width: 20,
                         renderer: function(val, metadata, item) {
                             return self.getFileStatus(item.data);
                         }
                     },
                     {
                         header: 'Size',
-                        dataIndex: 'length',
+                        dataIndex: 'size',
                         width: 35,
-                        renderer: function(val, metadata, item) {
-                            return self.getFileSize(item.data);
-                        }
                     },
                     {
                         header: 'Modified',
-                        dataIndex: 'lastModified',
-                        xtype: 'datecolumn',
-                        format: 'M d Y h:m a',
+                        dataIndex: 'modified',
                         width: 75
-                    },
+                    }
                 ]
             });
         }
@@ -651,14 +902,7 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
     
     /* Get the current path as an array. */
     getPathAsArray: function() {
-        var parts = this.path.split('/');
-        if (parts[0] == '') {
-            parts[0] = '/';
-        } else {
-            parts.splice(0, 0 , '/');
-        }
-        
-        return parts;
+        return this.path.split('/');
     },
     
     /* Set data being presented in the browser. */
@@ -670,8 +914,27 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
         
         if (Ext.isArray(data)) {
             this.filterData();
+            this.disableControls(data);
         } else {
             this.fileDetails();
+        }
+    },
+
+    /* Determine which controls should be enabled/disabled. */
+    disableControls: function(data) {
+        var bb = this.getBottomToolbar();
+        if (data && data[0].writable) {
+            bb.makeDirBtn.enable();
+            bb.uploadBtn.enable();
+        } else {
+            bb.makeDirBtn.disable();
+            bb.uploadBtn.disable();
+        }
+
+        if (data && this.getPathAsArray().length > 1) {
+            bb.goToParentBtn.enable();
+        } else {
+            bb.goToParentBtn.disable();
         }
     },
     
@@ -695,7 +958,7 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
                 item = item.substr(0, 9) + '...' + item.substr(item.length - 3, 3);
             }
             
-            var path = '/' + parts.slice(1, idx + 1).join('/');
+            var path = parts.slice(0, idx + 1).join('/');
             tb.add({
                 xtype: 'button',
                 text: item,
@@ -719,6 +982,7 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
     
     /* Display filtered data in grid. */
     filterData: function() {
+        var self = this;
         var patterns = Ext.get('fileFilterInput').getValue().split(/,|\s/);
         
         var regex;
@@ -749,7 +1013,7 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
             
             filtered.push(item);
         });
-        
+
         this.store.loadData({files: filtered});
     },
     
@@ -806,38 +1070,19 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
         return 'document.png';
     },
     
-    /* Return string that describes a file's size. */
-    getFileSize: function(item) {
-        var val = item.length;
-        
-        if (false) {
-            return 
-        } else if (val > 1099511627776) {
-            return (val / 1099511627776).toFixed(1) + ' TB';
-        } else if (val > 1073741824) {
-            return (val / 1073741824).toFixed(1) + ' GB';
-        } else if (val > 104857) {
-            return (val / 104857).toFixed(1) + ' MB';
-        } else if (val > 0) {
-            return (val / 1024).toFixed(1) + ' KB';
-        } else {
-            if (item.type === 'dir') {
-                return '--';
-            } else {
-                return 'empty';
-            }
-        }
-    },
-    
     /* Return an html snipprt to represent the current status. */
     getFileStatus: function(item) {
         var html = '<div class="file-status">';
         
         // Permission icon
-        html += '<div style="background-image: url(jsfb/resources/images/lock-unlock.png);"></div>';
+        if (item.writable) {
+            html += '<div style="background-image: url(jsfb/resources/images/lock-unlock.png);"></div>';
+        } else {
+            html += '<div style="background-image: url(jsfb/resources/images/lock.png);"></div>';
+        }
         
         // Sharing icon
-        html += '<div style="background-image: url(jsfb/resources/images/users.png);"></div>';
+        //html += '<div style="background-image: url(jsfb/resources/images/users.png);"></div>';
         
         // Info icon
         var infoClick = "var fb = Ext.getCmp('" + this.id + "'); fb.pathDetails('" +
@@ -862,157 +1107,32 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
     /* Display file details in browser window. */
     fileDetails: function() {
         var self = this;
-        
+
         // Hide grid
         var gridContainer = Ext.query('.x-panel-body', this.el.dom)[0];
         gridContainer.innerHTML = '';
-        
-        var params = {
-            'size': this.getFileSize(this.data),
-            'modified': new Date(this.data.lastModified).format('M d Y h:m a'),
-            'download': 'fake' // Use adapter to get download url???
-        };
-        Ext.apply(params, this.data);
-        
-        var html = '<table class="dl">' +
-                     '<tbody>' +
-                       '<tr><th>File:</th><td>{name}</td></tr>' +
-                       '<tr><th>Path:</th><td>{path}</td></tr>' +
-                       '<tr><th>Owner:</th><td>{owner}</td></tr>' +
-                       '<tr><th>Modified:</th><td>{modified}</td></tr>' +
-                       '<tr><th>Permissions:</th><td>{permissions}</td></tr>' +
-                       '<tr><th>Size:</th><td>{size}</td></tr>' +
-                       '<tr><th>File Type:</th><td>{mimeType}</td></tr>' +
-                       '<tr><th>Download:</th><td><a href="{download}">{download}</a></td></tr>' +
-                     '</tbody>' +
-                   '</table>';
-        var tpl = new Ext.Template(html);
-        
-        var fileDetails = new Ext.Panel({
+       
+        // Render details 
+        var fileDetails = new jsfb.widgets.FileDetailPanel({
             renderTo: gridContainer,
-            border: false,
-            frame: false,
-            height: 320,
-            layout: 'fit',
-            html: tpl.apply(params),
-            bbar: [
-               {
-                   xtype: 'button',
-                   text: 'Rename',
-                   icon: 'jsfb/resources/images/document-rename.png',
-                   listeners: {
-                       render: function(item, e) {
-                           new Ext.ToolTip({
-                               target: item.el,
-                               title: 'Rename ' + params.type +'.'
-                           });
-                       },
-                       click: function(item, e) {
-                           // Show rename file window.
-                           var win = new Ext.Window({
-                               renderTo: self.el,
-                               title: 'Rename',
-                               width: 300,
-                               padding: 10,
-                               resizable: false,
-                               layout: 'form',
-                               items: [
-                                   {
-                                       xtype: 'form',
-                                       ref: 'renameForm',
-                                       unstyled: true,
-                                       padding: 5,
-                                       items: [
-                                           {
-                                               xtype: 'textfield',
-                                               width: 150,
-                                               fieldLabel: 'Name',
-                                               name: 'name',
-                                               allowBlank: false
-                                           }
-                                       ]
-                                   }
-                               ],
-                               bbar: [
-                                  {
-                                      xtype: 'button',
-                                      text: 'Rename',
-                                      icon: 'jsfb/resources/images/document-rename.png',
-                                      handler: function() {
-                                          var form = win.makeDirForm.getForm();
-                                          if (form.isValid()) {
-                                              self.fireEvent('renamepath', self, form.getFieldValues().name, self.data);
-                                              win.close();
-                                          }
-                                      }
-                                  },
-                                  '&nbsp;',
-                                  {
-                                      xtype: 'button',
-                                      text: 'Cancel',
-                                      icon: 'jsfb/resources/images/close.png',
-                                      handler: function() {
-                                          win.close();
-                                      }
-                                  }
-                               ]
-                           });
-                           win.show();
-                       }
-                   }
-               },
-               '&nbsp;',
-               {
-                   xtype: 'button',
-                   text: 'Delete',
-                   icon: 'jsfb/resources/images/document--minus.png',
-                   listeners: {
-                       render: function(item, e) {
-                           new Ext.ToolTip({
-                               target: item.el,
-                               title: 'Delete ' + params.type +'.'
-                           });
-                       },
-                       click: function(item, e) {
-                           // Show delete file window.
-                           var win = new Ext.Window({
-                               renderTo: self.el,
-                               title: 'Delete?',
-                               width: 300,
-                               padding: 10,
-                               resizable: false,
-                               html: 'Delete?',
-                               bbar: [
-                                  {
-                                      xtype: 'button',
-                                      text: 'Cancel',
-                                      icon: 'jsfb/resources/images/check.png',
-                                      handler: function() {
-                                          win.close();
-                                      }
-                                  },
-                                  '&nbsp;',
-                                  {
-                                      xtype: 'button',
-                                      text: 'Delete',
-                                      icon: 'jsfb/resources/images/close.png',
-                                      handler: function() {
-                                          self.fireEvent('deletepath', self, self.data);
-                                          win.close();
-                                      }
-                                  },
-                               ]
-                           });
-                           win.show();
-                       }
-                   }
-               }
-            ]
+            data: this.data,
+            listeners: {
+                renamepath: function(src, name, data) { 
+                    self.fireEvent('renamepath', self, name, data);
+                },
+                removepath: function(src, data) {
+                    self.fireEvent('removepath', self, data);
+                }
+            }
         });
+
+        // Disable directory controls.
+        this.disableControls();
     }
 });
 
-Ext.reg('jsfbfilegrid', jsfb.widgets.FileGrid);jsfb.widgets.Login = Ext.extend(Ext.FormPanel, {
+Ext.reg('jsfbfilegrid', jsfb.widgets.FileGrid);
+jsfb.widgets.Login = Ext.extend(Ext.FormPanel, {
     constructor: function(config) {
         var self = this;
         
@@ -1048,15 +1168,7 @@ Ext.reg('jsfbfilegrid', jsfb.widgets.FileGrid);jsfb.widgets.Login = Ext.extend(E
                     name: 'url',
                     allowBlank: false,
                     value: config && config.url? config.url:undefined
-                },
-                {
-                    xtype: 'textfield',
-                    width: 250,
-                    fieldLabel: 'Go To Path',
-                    name: 'path',
-                    allowBlank: false,
-                    value: config && config.path? config.path:undefined
-                },
+                }
             ],
             bbar: [
                {
@@ -1082,12 +1194,15 @@ Ext.reg('jsfbfilegrid', jsfb.widgets.FileGrid);jsfb.widgets.Login = Ext.extend(E
     login: function() {
         var form = this.getForm();
         if (form.isValid()) {
-            this.fireEvent('login', this, form.getFieldValues());
+            var vals = form.getFieldValues();
+            vals.path = vals.user;
+            this.fireEvent('login', this, vals);
         }
     }
 });
 
-Ext.reg('jsfblogin', jsfb.widgets.Login);/**
+Ext.reg('jsfblogin', jsfb.widgets.Login);
+/**
  * Use to encode/decode base64 data.
  * 
  * From: http://www.sencha.com/forum/showthread.php?35328-Ext.util.base64-(encode-decode)&p=167166
@@ -1292,7 +1407,7 @@ jsfb.data.RestAdapter = Ext.extend(Object, {
     },
 
     /* Handle an API failure. */
-    failure:  function(config, response, opts) {
+    failure: function(config, response, opts) {
         var msg = 'Error';
         try {
             var r = Ext.decode(response.responseText);
@@ -1301,7 +1416,7 @@ jsfb.data.RestAdapter = Ext.extend(Object, {
 
         config.failure(msg);
     },
-    
+
     /* Login to the data provider. */
     login: function(config) {
         var auth = 'Basic ' + 
@@ -1312,6 +1427,9 @@ jsfb.data.RestAdapter = Ext.extend(Object, {
             'Authorization': 'Basic ' + 
                 Ext.util.base64.encode(config.user + ':' + config.password)
         };
+
+        // Leave off cache buster string
+        Ext.Ajax.disableCaching = false;
 
         this.list(config);
     },
@@ -1351,12 +1469,96 @@ jsfb.data.RestAdapter = Ext.extend(Object, {
             params: {dirName: config.name, action: 'mkdir'},
             method: 'PUT',
             success: function(response, opts) {
-                var r = Ext.decode(response.responseText);
-                config.success(r.result);
+                config.success();
             },
             failure:  function(response, opts) {
                 self.failure(config, response, opts);
             }
         });
+    },
+
+    /* Rename a path. */
+    renamePath: function(config) {
+        var self = this;
+
+        Ext.Ajax.request({
+            url: config.url + '/io-v1/io/' + this.pathAsUrl(config.path) + '/',
+            params: {newName: config.name, action: 'rename'},
+            method: 'PUT',
+            success: function(response, opts) {
+                config.success();
+            },
+            failure:  function(response, opts) {
+                self.failure(config, response, opts);
+            }
+        });
+    },
+
+    /* Delete a path. */
+    deletePath: function(config) {
+        var self = this;
+
+        Ext.Ajax.request({
+            url: config.url + '/io-v1/io/' + this.pathAsUrl(config.item.path) + '/',
+            method: 'DELETE',
+            success: function(response, opts) {
+                config.success();
+            },
+            failure:  function(response, opts) {
+                self.failure(config, response, opts);
+            }
+        });
+    },
+
+    /* Upload a file to the current directory. */
+    upload: function(config) {
+        // Can't upload via XmlHttpRequest,
+        // Can't set auth headers via some other 
+        console.log('not supported yet!');
     }
+});
+/* Formats data to be displayed in a FileGrid. */
+jsfb.data.DataFormatter = Ext.extend(Object, {
+
+    /* Return string that describes a file's size. */
+    getFileSize: function(item) {
+        var val = item.length;
+
+        if (false) {
+            return
+        } else if (val > 1099511627776) {
+            return (val / 1099511627776).toFixed(1) + ' TB';
+        } else if (val > 1073741824) {
+            return (val / 1073741824).toFixed(1) + ' GB';
+        } else if (val > 104857) {
+            return (val / 104857).toFixed(1) + ' MB';
+        } else if (val > 0) {
+            return (val / 1024).toFixed(1) + ' KB';
+        } else {
+            if (item.type === 'dir') {
+                return '--';
+            } else {
+                return 'empty';
+            }
+        }
+    },
+
+    /* Format special fields. */
+    format: function(data) {
+        data.size = this.getFileSize(data);
+        data.modified = new Date(data.lastModified).format('M d Y h:m a');
+
+        // REST API data misspelling
+        if (data.permisssion) {
+            data.permission = data.permisssion;
+        }
+
+        // Short-cut to determine if user has write access
+        var writes = ['own', 'all', 'write'];
+        if (writes.indexOf(data.permissions.toLowerCase()) > -1) {
+            data.writable = true;
+        } else {
+            data.writable = false;
+        }
+    },
 });

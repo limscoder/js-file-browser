@@ -1152,6 +1152,9 @@
             "text": "Browser.js",
             "path": "widgets/"
         },{
+            "text": "FileDetailPanel.js",
+            "path": "widgets/"
+        },{
             "text": "FileGrid.js",
             "path": "widgets/"
         },{
@@ -1165,6 +1168,9 @@
             "path": "data/"
         },{
             "text": "RestAdapter.js",
+            "path": "data/"
+        },{
+            "text": "DataFormatter.js",
             "path": "data/"
         }]
     }, {

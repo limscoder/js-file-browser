@@ -14,7 +14,7 @@ jsfb.data.RestAdapter = Ext.extend(Object, {
     },
 
     /* Handle an API failure. */
-    failure:  function(config, response, opts) {
+    failure: function(config, response, opts) {
         var msg = 'Error';
         try {
             var r = Ext.decode(response.responseText);
@@ -23,7 +23,7 @@ jsfb.data.RestAdapter = Ext.extend(Object, {
 
         config.failure(msg);
     },
-    
+
     /* Login to the data provider. */
     login: function(config) {
         var auth = 'Basic ' + 
@@ -34,6 +34,9 @@ jsfb.data.RestAdapter = Ext.extend(Object, {
             'Authorization': 'Basic ' + 
                 Ext.util.base64.encode(config.user + ':' + config.password)
         };
+
+        // Leave off cache buster string
+        Ext.Ajax.disableCaching = false;
 
         this.list(config);
     },
@@ -73,12 +76,51 @@ jsfb.data.RestAdapter = Ext.extend(Object, {
             params: {dirName: config.name, action: 'mkdir'},
             method: 'PUT',
             success: function(response, opts) {
-                var r = Ext.decode(response.responseText);
-                config.success(r.result);
+                config.success();
             },
             failure:  function(response, opts) {
                 self.failure(config, response, opts);
             }
         });
+    },
+
+    /* Rename a path. */
+    renamePath: function(config) {
+        var self = this;
+
+        Ext.Ajax.request({
+            url: config.url + '/io-v1/io/' + this.pathAsUrl(config.path) + '/',
+            params: {newName: config.name, action: 'rename'},
+            method: 'PUT',
+            success: function(response, opts) {
+                config.success();
+            },
+            failure:  function(response, opts) {
+                self.failure(config, response, opts);
+            }
+        });
+    },
+
+    /* Delete a path. */
+    deletePath: function(config) {
+        var self = this;
+
+        Ext.Ajax.request({
+            url: config.url + '/io-v1/io/' + this.pathAsUrl(config.item.path) + '/',
+            method: 'DELETE',
+            success: function(response, opts) {
+                config.success();
+            },
+            failure:  function(response, opts) {
+                self.failure(config, response, opts);
+            }
+        });
+    },
+
+    /* Upload a file to the current directory. */
+    upload: function(config) {
+        // Can't upload via XmlHttpRequest,
+        // Can't set auth headers via some other 
+        console.log('not supported yet!');
     }
 });

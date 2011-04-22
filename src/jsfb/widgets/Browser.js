@@ -17,6 +17,10 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
         if (!defaults.fileAdapter) {
             defaults.fileAdapter = new jsfb.data.RestAdapter();
         }
+
+        if (!defaults.dataFormatter) {
+            defaults.dataFormatter = new jsfb.data.DataFormatter();
+        }
         
         // init instance.
         Ext.apply(this, defaults);
@@ -133,8 +137,8 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
         var self = this;
         var config = this.getApiConfig();
         Ext.apply(config, {
-            success: function(data) {
-                callback(data);
+            success: function() {
+                callback.apply(this, arguments);
                 self.hideLoading();
             },
             failure: function(msg) {
@@ -204,12 +208,13 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
     
     /* Change path. */
     changePath: function(path) {
-        console.log('Changing path to: ' + path);
-        
         var self = this;
         this.path = path;
+        console.log('Changed Path: ' + this.path);
         
         var config = this.getApiCallConfig(function(data) {
+            console.log('Got Data!');
+            console.log(data);
             self.setData(data);
         });
         
@@ -237,7 +242,6 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
         var oldName = item.name;
         
         var config = this.getApiCallConfig(function() {
-            
             if (Ext.isArray(self.data)) {
                 self.changePath(self.path);
             } else {
@@ -247,7 +251,7 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
             }
         });
         config.item = item;
-        config.newName = name;
+        config.name = name;
         
         this.showLoading();
         this.fileAdapter.renamePath(config);
@@ -258,19 +262,27 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
         var self = this;
         
         var config = this.getApiCallConfig(function() {
-            if (Ext.isArray(self.data)) {
-                self.changePath(self.path);
-            } else {
-                var parts = item.path.split('/');
-                self.changePath('/' + parts.splice(parts.length - 1, 1).join('/'));
-            }
+            self.changePath(self.path);
         });
         config.item = item
         
         this.showLoading();
         this.fileAdapter.deletePath(config);
     },
-    
+
+    /* Upload a file to the current directory. */
+    upload: function(form) {
+        var self = this;
+
+        var config = this.getApiCallConfig(function() {
+            self.changePath(self.path);
+        });
+        config.form = form
+
+        this.showLoading();
+        this.fileAdapter.upload(config);
+    },
+
     /* Update directory listing data. */
     setData: function(data) {
         var self = this;
@@ -292,8 +304,11 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
                     renamepath: function(src, name, item) {
                         self.renamePath(name, item);
                     },
-                    deletepath: function(src, item) {
+                    removepath: function(src, item) {
                         self.deletePath(item);
+                    },
+                    upload: function(form) {
+                        self.upload(form);
                     }
                 }
             });
@@ -314,6 +329,14 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
         
         // render and set data
         this.doLayout();
+
+        if (Ext.isArray(data)) {
+            Ext.each(data, function(item) {
+                self.dataFormatter.format(item);
+            });
+        } else {
+            this.dataFormatter.format(data);
+        }
         this.fileGrid.setData(this.path, data);
         
         // Force grid re-render!

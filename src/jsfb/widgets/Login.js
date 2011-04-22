@@ -34,15 +34,7 @@ jsfb.widgets.Login = Ext.extend(Ext.FormPanel, {
                     name: 'url',
                     allowBlank: false,
                     value: config && config.url? config.url:undefined
-                },
-                {
-                    xtype: 'textfield',
-                    width: 250,
-                    fieldLabel: 'Go To Path',
-                    name: 'path',
-                    allowBlank: false,
-                    value: config && config.path? config.path:undefined
-                },
+                }
             ],
             bbar: [
                {
@@ -68,7 +60,9 @@ jsfb.widgets.Login = Ext.extend(Ext.FormPanel, {
     login: function() {
         var form = this.getForm();
         if (form.isValid()) {
-            this.fireEvent('login', this, form.getFieldValues());
+            var vals = form.getFieldValues();
+            vals.path = vals.user;
+            this.fireEvent('login', this, vals);
         }
     }
 });
