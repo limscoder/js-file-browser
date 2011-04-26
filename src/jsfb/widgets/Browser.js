@@ -10,7 +10,8 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
             width: 600,
             url: '',
             path: '/',
-            layout: 'fit'
+            layout: 'fit',
+            resource_prefix: '/static/galaxy_irods/jsfb/resources/'
         }
         Ext.apply(defaults, config);
         
@@ -25,6 +26,9 @@ jsfb.widgets.Browser = Ext.extend(Ext.Panel, {
         // init instance.
         Ext.apply(this, defaults);
         jsfb.widgets.Browser.superclass.constructor.apply(this, arguments);
+
+        // Path to find resources.
+        jsfb.resource_prefix = defaults.resource_prefix;
         
         // show login screen
         this.logout();

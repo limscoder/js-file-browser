@@ -57,7 +57,7 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
                     {
                         xtype: 'button',
                         ref: 'goToParentBtn',
-                        icon: 'jsfb/resources/images/folder-horizontal--arrow-90.png',
+                        icon: jsfb.resource_prefix + 'images/folder-horizontal--arrow-90.png',
                         listeners: {
                             render: function(item, e) {
                                 new Ext.ToolTip({
@@ -75,7 +75,7 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
                     {
                         xtype: 'button',
                         ref: 'reloadBtn',
-                        icon: 'jsfb/resources/images/folder-horizontal--arrow-315.png',
+                        icon: jsfb.resource_prefix + 'images/folder-horizontal--arrow-315.png',
                         listeners: {
                             render: function(item, e) {
                                 new Ext.ToolTip({
@@ -91,7 +91,7 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
                     {
                         xtype: 'button',
                         ref: 'makeDirBtn',
-                        icon: 'jsfb/resources/images/folder-horizontal--plus.png',
+                        icon: jsfb.resource_prefix + 'images/folder-horizontal--plus.png',
                         listeners: {
                             render: function(item, e) {
                                 new Ext.ToolTip({
@@ -129,7 +129,7 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
                                        {
                                            xtype: 'button',
                                            text: 'Create',
-                                           icon: 'jsfb/resources/images/folder-horizontal--plus.png',
+                                           icon: jsfb.resource_prefix + 'images/folder-horizontal--plus.png',
                                            handler: function() {
                                                var form = win.makeDirForm.getForm();
                                                if (form.isValid()) {
@@ -142,7 +142,7 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
                                        {
                                            xtype: 'button',
                                            text: 'Cancel',
-                                           icon: 'jsfb/resources/images/close.png',
+                                           icon: jsfb.resource_prefix + 'images/close.png',
                                            handler: function() {
                                                win.close();
                                            }
@@ -156,7 +156,7 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
                     {
                         xtype: 'button',
                         ref: 'uploadBtn',
-                        icon: 'jsfb/resources/images/document--plus.png',
+                        icon: jsfb.resource_prefix + 'images/document--plus.png',
                         listeners: {
                             render: function(item, e) {
                                 new Ext.ToolTip({
@@ -196,7 +196,7 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
                                        {
                                            xtype: 'button',
                                            text: 'Upload',
-                                           icon: 'jsfb/resources/images/document--plus.png',
+                                           icon: jsfb.resource_prefix + 'images/document--plus.png',
                                            handler: function() {
                                                var form = win.uploadForm.getForm();
                                                if (form.isValid()) {
@@ -209,7 +209,7 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
                                        {
                                            xtype: 'button',
                                            text: 'Cancel',
-                                           icon: 'jsfb/resources/images/close.png',
+                                           icon: jsfb.resource_prefix + 'images/close.png',
                                            handler: function() {
                                                win.close();
                                            }
@@ -263,7 +263,7 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
                         renderer: function(val, metadata, item) {
                             // Add icon and link
                             var icon = self.getIcon(item.data);
-                            var style = 'background-image: url(jsfb/resources/images/' + icon + ');'
+                            var style = 'background-image: url(' + jsfb.resource_prefix + 'images/' + icon + ');'
                             return '<div class="filename" style="' + style + '">' + val + '</div>';
                         }
                     },
@@ -482,18 +482,18 @@ jsfb.widgets.FileGrid = Ext.extend(Ext.grid.GridPanel, {
         
         // Permission icon
         if (item.writable) {
-            html += '<div style="background-image: url(jsfb/resources/images/lock-unlock.png);"></div>';
+            html += '<div style="background-image: url(' + jsfb.resource_prefix + 'images/lock-unlock.png);"></div>';
         } else {
-            html += '<div style="background-image: url(jsfb/resources/images/lock.png);"></div>';
+            html += '<div style="background-image: url(' + jsfb.resource_prefix + 'images/lock.png);"></div>';
         }
         
         // Sharing icon
-        //html += '<div style="background-image: url(jsfb/resources/images/users.png);"></div>';
+        //html += '<div style="background-image: url(../resources/images/users.png);"></div>';
         
         // Info icon
         var infoClick = "var fb = Ext.getCmp('" + this.id + "'); fb.pathDetails('" +
             item.path + "'); return false;";
-        html += '<a onclick="' + infoClick + '"><div style="background-image: url(jsfb/resources/images/information-frame.png);"></div></a>';
+        html += '<a onclick="' + infoClick + '"><div style="background-image: url(' + jsfb.resource_prefix + 'images/information-frame.png);"></div></a>';
         
         html += '</div>';
         return html;

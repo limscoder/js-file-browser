@@ -40,7 +40,7 @@ jsfb.widgets.Login = Ext.extend(Ext.FormPanel, {
                {
                    xtype: 'button',
                    text: 'Login',
-                   icon: 'jsfb/resources/images/door--arrow.png',
+                   icon: jsfb.resource_prefix + 'images/door--arrow.png',
                    handler: function() {
                        self.login();
                    }
